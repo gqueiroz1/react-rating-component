@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import RatingItem from "./RatingItem"
 import { useHover } from '@react-hooks-library/core'
 
-const Rating = ({ maxRating, inactiveIcon, activeIcon }) => {
+const Rating = ({ maxRating, inactiveIcon, activeIcon, color = 'black', size = 'sm', onRated }) => {
   const wrapperRef = useRef(null)
   const isHovered = useHover(wrapperRef)
   const [rating, setRating] = useState(0)
@@ -14,6 +14,7 @@ const Rating = ({ maxRating, inactiveIcon, activeIcon }) => {
 
   const handleClick = i => {
     setRating(i + 1)
+    onRated(i + 1)
     setTempRating(0)
   }
 
@@ -24,7 +25,8 @@ const Rating = ({ maxRating, inactiveIcon, activeIcon }) => {
           <RatingItem 
             icon={(tempRating || rating) >= i + 1 ? activeIcon : inactiveIcon } 
             key={i} 
-            color="#d0d304"
+            color={color}
+            size={size}
             onMouseEnter={() => setTempRating(i + 1)}
             onClick={() => handleClick(i)}
           />
