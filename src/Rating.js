@@ -1,8 +1,18 @@
 import { useEffect, useRef, useState } from "react"
 import RatingItem from "./RatingItem"
 import { useHover } from '@react-hooks-library/core'
+import PropTypes from 'prop-types';
 
-const Rating = ({ maxRating, inactiveIcon, activeIcon, color = 'black', size = 'sm', onRated }) => {
+Rating.propTypes = {
+  maxRating: PropTypes.number, 
+  inactiveIcon: PropTypes.object, 
+  activeIcon: PropTypes.object, 
+  color: PropTypes.string, 
+  size: PropTypes.string, 
+  onRated: PropTypes.func
+}
+
+export default function Rating ({ maxRating = 5, inactiveIcon, activeIcon, color = 'black', size = 'sm', onRated }) {
   const wrapperRef = useRef(null)
   const isHovered = useHover(wrapperRef)
   const [rating, setRating] = useState(0)
@@ -35,5 +45,3 @@ const Rating = ({ maxRating, inactiveIcon, activeIcon, color = 'black', size = '
     </div>
   )
 }
-
-export default Rating
